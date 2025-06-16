@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التدريب الإلكترونية - مستشفى جازان العام</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 140px);
+        }
+
+        .page {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Homepage */
+        .hero {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #2196F3;
+            border: 2px solid #2196F3;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Featured Courses Section */
+        .featured-courses {
+            margin: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .course-category {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .course-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Course Details */
+        .course-details {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: #2196F3;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        .course-header {
+            margin-bottom: 2rem;
+        }
+
+        .course-header h2 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .course-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            border-right: 4px solid #2196F3;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .register-section {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            border-radius: 15px;
+            color: white;
+        }
+
+        /* Calendar */
+        .calendar-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-placeholder {
+            height: 500px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        /* FAQ */
+        .faq-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: right;
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+            padding-bottom: 1rem;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .quick-link {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-link-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .progress-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-path {
+                flex-direction: column;
+            }
+
+            .path-connector {
+                width: 2px;
+                height: 30px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Profile Styles */
+        .profile-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            position: relative;
+        }
+
+        .profile-avatar {
+            flex-shrink: 0;
+        }
+
+        .avatar-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-info h2 {
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .profile-info p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .edit-profile-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-profile-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-overview {
+            margin-bottom: 3rem;
+        }
+
+        .progress-overview h3 {
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+
+        .progress-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .progress-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .progress-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-icon {
+            font-size: 2.5rem;
+            width: 60px;
+            text-align: center;
+        }
+
+        .progress-content h4 {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .progress-bar.small {
+            height: 6px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #2196F3, #4CAF50);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .achievement-text {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .rating-stars {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .rating-text {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .courses-section {
+            margin-bottom: 3rem;
+        }
+
+        .courses-section h3 {
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 0.5rem;
+        }
+
+        .enrolled-courses, .completed-courses {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .enrolled-course-card, .completed-course-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .enrolled-course-card:hover, .completed-course-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .course-status-badge.in-progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .course-status-badge.upcoming {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .course-status-badge.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .enrolled-course-card .course-image,
+        .completed-course-card .course-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .course-details {
+            flex: 1;
+        }
+
+        .course-details h4 {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .course-instructor {
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .course-schedule, .completion-date {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .course-countdown {
+            margin-top: 0.5rem;
+        }
+
+        .countdown-text {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .rating-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .course-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .btn.small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn.btn-outline {
+            background: transparent;
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+
+        .btn.btn-outline:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .certificates-section {
+            margin-bottom: 3rem;
+        }
+
+        .certificates-section h3 {
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 0.5rem;
+        }
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .certificate-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .certificate-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .certificate-card h4 {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .certificate-card p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-date {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem !important;
+        }
+
+        .learning-path-section h3 {
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #FF9800;
+            padding-bottom: 0.5rem;
+        }
+
+        .learning-path {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+
+        .path-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .path-step.completed .step-number {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .path-step.current .step-number {
+            background: linear-gradient(45deg, #2196F3, #1976d2);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .step-content h4 {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .step-content p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-status {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .path-step.completed .step-status {
+            color: #4CAF50;
+        }
+
+        .path-step.current .step-status {
+            color: #2196F3;
+        }
+
+        .path-connector {
+            height: 2px;
+            background: #e9ecef;
+            flex: 1;
+            margin: 0 1rem;
+            position: relative;
+        }
+
+        .path-connector.completed {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+        }
+
+        .path-connector.current {
+            background: linear-gradient(45deg, #2196F3, #1976d2);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(33, 150, 243, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page.active {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🏥</div>
+                    <div class="logo-text">
+                        <h1>منصة التدريب الإلكترونية</h1>
+                        <p>مستشفى جازان العام</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home')" class="nav-link active">الرئيسية</a></li>
+                        <li><a href="#" onclick="showPage('courses')" class="nav-link">الدورات</a></li>
+                        <li><a href="#" onclick="showPage('calendar')" class="nav-link">التقويم</a></li>
+                        <li><a href="#" onclick="showPage('faq')" class="nav-link">الأسئلة الشائعة</a></li>
+                        <li><a href="#" onclick="showPage('profile')" class="nav-link">ملفي الشخصي</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- User Profile Page -->
+            <div id="profile" class="page">
+                <div class="profile-container">
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <div class="avatar-circle">👨‍⚕️</div>
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="user-name">د. أحمد محمد العلي</h2>
+                            <p id="user-position">ممرض أول - قسم الطوارئ</p>
+                            <p id="user-id">الرقم الوظيفي: 12345</p>
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number" id="completed-count">3</span>
+                                    <span class="stat-label">دورات مكتملة</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" id="enrolled-count">2</span>
+                                    <span class="stat-label">دورات مسجلة</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" id="hours-count">28</span>
+                                    <span class="stat-label">ساعات تدريبية</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="edit-profile-btn" onclick="editProfile()">
+                            تعديل الملف الشخصي
+                        </button>
+                    </div>
+
+                    <!-- Progress Overview -->
+                    <div class="progress-overview">
+                        <h3>نظرة عامة على التقدم</h3>
+                        <div class="progress-cards">
+                            <div class="progress-card">
+                                <div class="progress-icon">📈</div>
+                                <div class="progress-content">
+                                    <h4>معدل الإنجاز</h4>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="progress-text">85% مكتمل</span>
+                                </div>
+                            </div>
+                            <div class="progress-card">
+                                <div class="progress-icon">🏆</div>
+                                <div class="progress-content">
+                                    <h4>الشهادات المحصلة</h4>
+                                    <p class="achievement-text">3 شهادات معتمدة</p>
+                                </div>
+                            </div>
+                            <div class="progress-card">
+                                <div class="progress-icon">⭐</div>
+                                <div class="progress-content">
+                                    <h4>التقييم العام</h4>
+                                    <div class="rating-stars">
+                                        <span>⭐⭐⭐⭐⭐</span>
+                                        <span class="rating-text">4.8/5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enrolled Courses -->
+                    <div class="courses-section">
+                        <h3>الدورات المسجل بها حالياً</h3>
+                        <div class="enrolled-courses">
+                            <div class="enrolled-course-card">
+                                <div class="course-status-badge in-progress">قيد التنفيذ</div>
+                                <div class="course-image">🚑</div>
+                                <div class="course-details">
+                                    <h4>طب الطوارئ والإسعافات الأولية</h4>
+                                    <p class="course-instructor">د. محمد العتيبي</p>
+                                    <p class="course-schedule">20 يوليو 2025 - 10:00 صباحاً</p>
+                                    <div class="course-progress">
+                                        <div class="progress-bar small">
+                                            <div class="progress-fill" style="width: 60%"></div>
+                                        </div>
+                                        <span class="progress-text">60% مكتمل</span>
+                                    </div>
+                                </div>
+                                <div class="course-actions">
+                                    <button class="btn btn-primary small">متابعة الدورة</button>
+                                    <button class="btn btn-secondary small">عرض التفاصيل</button>
+                                </div>
+                            </div>
+
+                            <div class="enrolled-course-card">
+                                <div class="course-status-badge upcoming">قادمة</div>
+                                <div class="course-image">🦠</div>
+                                <div class="course-details">
+                                    <h4>مكافحة العدوى والتعقيم</h4>
+                                    <p class="course-instructor">د. سارة القحطاني</p>
+                                    <p class="course-schedule">25 يوليو 2025 - 2:00 مساءً</p>
+                                    <div class="course-countdown">
+                                        <span class="countdown-text">يبدأ خلال 9 أيام</span>
+                                    </div>
+                                </div>
+                                <div class="course-actions">
+                                    <button class="btn btn-secondary small">عرض التفاصيل</button>
+                                    <button class="btn btn-outline small">إلغاء التسجيل</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Completed Courses -->
+                    <div class="courses-section">
+                        <h3>الدورات المكتملة</h3>
+                        <div class="completed-courses">
+                            <div class="completed-course-card">
+                                <div class="course-status-badge completed">مكتملة</div>
+                                <div class="course-image">👩‍⚕️</div>
+                                <div class="course-details">
+                                    <h4>الرعاية التمريضية الأساسية</h4>
+                                    <p class="course-instructor">د. فاطمة الأحمد</p>
+                                    <p class="completion-date">اكتملت في: 15 يونيو 2025</p>
+                                    <div class="course-rating">
+                                        <span class="rating-label">تقييمك:</span>
+                                        <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                                    </div>
+                                </div>
+                                <div class="course-actions">
+                                    <button class="btn btn-primary small">تحميل الشهادة</button>
+                                    <button class="btn btn-secondary small">إضافة تقييم</button>
+                                </div>
+                            </div>
+
+                            <div class="completed-course-card">
+                                <div class="course-status-badge completed">مكتملة</div>
+                                <div class="course-image">💊</div>
+                                <div class="course-details">
+                                    <h4>إدارة الأدوية والصيدلة</h4>
+                                    <p class="course-instructor">د. خالد المالكي</p>
+                                    <p class="completion-date">اكتملت في: 28 مايو 2025</p>
+                                    <div class="course-rating">
+                                        <span class="rating-label">تقييمك:</span>
+                                        <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                                    </div>
+                                </div>
+                                <div class="course-actions">
+                                    <button class="btn btn-primary small">تحميل الشهادة</button>
+                                    <button class="btn btn-secondary small">إضافة تقييم</button>
+                                </div>
+                            </div>
+
+                            <div class="completed-course-card">
+                                <div class="course-status-badge completed">مكتملة</div>
+                                <div class="course-image">🛡️</div>
+                                <div class="course-details">
+                                    <h4>الصحة والسلامة المهنية</h4>
+                                    <p class="course-instructor">م. خالد الزهراني</p>
+                                    <p class="completion-date">اكتملت في: 10 مايو 2025</p>
+                                    <div class="course-rating">
+                                        <span class="rating-label">تقييمك:</span>
+                                        <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                                    </div>
+                                </div>
+                                <div class="course-actions">
+                                    <button class="btn btn-primary small">تحميل الشهادة</button>
+                                    <button class="btn btn-secondary small">إضافة تقييم</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificates Section -->
+                    <div class="certificates-section">
+                        <h3>الشهادات والإنجازات</h3>
+                        <div class="certificates-grid">
+                            <div class="certificate-card">
+                                <div class="certificate-icon">🏆</div>
+                                <h4>شهادة التمريض المتقدم</h4>
+                                <p>معتمدة من مستشفى جازان العام</p>
+                                <p class="certificate-date">يونيو 2025</p>
+                                <button class="btn btn-primary small">عرض الشهادة</button>
+                            </div>
+                            <div class="certificate-card">
+                                <div class="certificate-icon">🥇</div>
+                                <h4>شهادة إدارة الأدوية</h4>
+                                <p>معتمدة من مستشفى جازان العام</p>
+                                <p class="certificate-date">مايو 2025</p>
+                                <button class="btn btn-primary small">عرض الشهادة</button>
+                            </div>
+                            <div class="certificate-card">
+                                <div class="certificate-icon">🛡️</div>
+                                <h4>شهادة السلامة المهنية</h4>
+                                <p>معتمدة من مستشفى جازان العام</p>
+                                <p class="certificate-date">مايو 2025</p>
+                                <button class="btn btn-primary small">عرض الشهادة</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Path -->
+                    <div class="learning-path-section">
+                        <h3>مسار التعلم المقترح</h3>
+                        <div class="learning-path">
+                            <div class="path-step completed">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>الأساسيات</h4>
+                                    <p>الرعاية التمريضية الأساسية</p>
+                                    <span class="step-status">✅ مكتمل</span>
+                                </div>
+                            </div>
+                            <div class="path-connector completed"></div>
+                            <div class="path-step completed">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>المتوسط</h4>
+                                    <p>إدارة الأدوية والصيدلة</p>
+                                    <span class="step-status">✅ مكتمل</span>
+                                </div>
+                            </div>
+                            <div class="path-connector current"></div>
+                            <div class="path-step current">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>المتقدم</h4>
+                                    <p>طب الطوارئ والإسعافات</p>
+                                    <span class="step-status">🔄 قيد التنفيذ</span>
+                                </div>
+                            </div>
+                            <div class="path-connector"></div>
+                            <div class="path-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h4>التخصص</h4>
+                                    <p>الرعاية المركزة</p>
+                                    <span class="step-status">⏳ قادم</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Homepage -->
+            <div id="home" class="page active">
+                <div class="hero">
+                    <h2>مرحباً بك في منصة التدريب الإلكترونية</h2>
+                    <p>طور مهاراتك المهنية من خلال دوراتنا التدريبية المتخصصة في المجال الطبي والصحي. انضم إلينا لتحصل على أفضل التدريبات المعتمدة.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showPage('courses')">استعراض الدورات</button>
+                        <button class="btn btn-secondary" onclick="showPage('calendar')">عرض التقويم</button>
+                    </div>
+                </div>
+
+                <div class="featured-courses">
+                    <h2 class="section-title">الدورات المميزة</h2>
+                    <div class="courses-grid">
+                        <div class="course-card" onclick="showCourseDetails('nursing-care')">
+                            <div class="course-image">👩‍⚕️</div>
+                            <div class="course-content">
+                                <h3 class="course-title">الرعاية التمريضية المتقدمة</h3>
+                                <p class="course-category">دورات التمريض</p>
+                                <div class="course-meta">
+                                    <span class="course-date">15 يوليو 2025</span>
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">عرض التفاصيل</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card" onclick="showCourseDetails('emergency-medicine')">
+                            <div class="course-image">🚑</div>
+                            <div class="course-content">
+                                <h3 class="course-title">طب الطوارئ والإسعافات الأولية</h3>
+                                <p class="course-category">الطب العام</p>
+                                <div class="course-meta">
+                                    <span class="course-date">20 يوليو 2025</span>
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">عرض التفاصيل</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card" onclick="showCourseDetails('infection-control')">
+                            <div class="course-image">🦠</div>
+                            <div class="course-content">
+                                <h3 class="course-title">مكافحة العدوى والتعقيم</h3>
+                                <p class="course-category">الصحة العامة</p>
+                                <div class="course-meta">
+                                    <span class="course-date">25 يوليو 2025</span>
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">عرض التفاصيل</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-links">
+                    <a href="#" onclick="showPage('courses')" class="quick-link">
+                        <div class="quick-link-icon">📚</div>
+                        <h3>جميع الدورات</h3>
+                        <p>استعرض كامل دوراتنا التدريبية</p>
+                    </a>
+                    <a href="#" onclick="showPage('calendar')" class="quick-link">
+                        <div class="quick-link-icon">📅</div>
+                        <h3>التقويم التدريبي</h3>
+                        <p>اطلع على مواعيد الدورات القادمة</p>
+                    </a>
+                    <a href="#" onclick="showPage('faq')" class="quick-link">
+                        <div class="quick-link-icon">❓</div>
+                        <h3>الأسئلة الشائعة</h3>
+                        <p>إجابات على استفساراتك</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Courses Page -->
+            <div id="courses" class="page">
+                <div class="course-details">
+                    <h2>كتالوج الدورات التدريبية</h2>
+                    <p>اختر من مجموعة واسعة من الدورات المتخصصة في المجال الطبي والصحي</p>
+                    
+                    <h3 style="margin: 2rem 0 1rem; color: #2c3e50; border-bottom: 2px solid #2196F3; padding-bottom: 0.5rem;">دورات التمريض</h3>
+                    <div class="courses-grid">
+                        <div class="course-card" onclick="showCourseDetails('nursing-care')">
+                            <div class="course-image">👩‍⚕️</div>
+                            <div class="course-content">
+                                <h3 class="course-title">الرعاية التمريضية المتقدمة</h3>
+                                <p class="course-category">دورات التمريض</p>
+                                <div class="course-meta">
+                                    <span class="course-date">15 يوليو 2025</span>
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">عرض التفاصيل</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card" onclick="showCourseDetails('pediatric-nursing')">
+                            <div class="course-image">👶</div>
+                            <div class="course-content">
+                                <h3 class="course-title">تمريض الأطفال</h3>
+                                <p class="course-category">دورات التمريض</p>
+                                <div class="course-meta">
+                                    <span class="course-date">30 يوليو 2025</span>
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">عرض التفاصيل</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 2rem 0 1rem; color: #2c3e50; border-bottom: 2px solid #4CAF50; padding-bottom: 0.5rem;">الطب العام</h3>
+                    <div class="courses-grid">
+                        <div class="course-card" onclick="showCourseDetails('emergency-medicine')">
+                            <div class="course-image">🚑</div>
+                            <div class="course-content">
+                                <h3 class="course-title">طب الطوارئ والإسعافات الأولية</h3>
+                                <p class="course-category">الطب العام</p>
+                                <div class="course-meta">
+                                    <span class="course-date">20 يوليو 2025</span>
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">عرض التفاصيل</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card" onclick="showCourseDetails('cardiology')">
+                            <div class="course-image">💓</div>
+                            <div class="course-content">
+                                <h3 class="course-title">أمراض القلب والأوعية الدموية</h3>
+                                <p class="course-category">الطب العام</p>
+                                <div class="course-meta">
+                                    <span class="course-date">5 أغسطس 2025</span>
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">عرض التفاصيل</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 2rem 0 1rem; color: #2c3e50; border-bottom: 2px solid #FF9800; padding-bottom: 0.5rem;">الصحة العامة</h3>
+                    <div class="courses-grid">
+                        <div class="course-card" onclick="showCourseDetails('infection-control')">
+                            <div class="course-image">🦠</div>
+                            <div class="course-content">
+                                <h3 class="course-title">مكافحة العدوى والتعقيم</h3>
+                                <p class="course-category">الصحة العامة</p>
+                                <div class="course-meta">
+                                    <span class="course-date">25 يوليو 2025</span>
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">عرض التفاصيل</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card" onclick="showCourseDetails('health-safety')">
+                            <div class="course-image">🛡️</div>
+                            <div class="course-content">
+                                <h3 class="course-title">الصحة والسلامة المهنية</h3>
+                                <p class="course-category">الصحة العامة</p>
+                                <div class="course-meta">
+                                    <span class="course-date">10 أغسطس 2025</span>
+                                    <button class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">عرض التفاصيل</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Details Page -->
+            <div id="course-details" class="page">
+                <div class="course-details">
+                    <button class="back-btn" onclick="showPage('courses')">
+                        ← العودة إلى الدورات
+                    </button>
+                    
+                    <div class="course-header">
+                        <h2 id="course-title">عنوان الدورة</h2>
+                        <div id="course-image-large" style="width: 100%; height: 300px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; margin: 1rem 0;">
+                            👩‍⚕️
+                        </div>
+                    </div>
+
+                    <div id="course-description">
+                        <h3>وصف الدورة</h3>
+                        <p id="course-desc-text">وصف تفصيلي للدورة التدريبية...</p>
+                    </div>
+
+                    <div id="course-objectives">
+                        <h3>أهداف الدورة</h3>
+                        <ul id="objectives-list">
+                            <li>الهدف الأول</li>
+                            <li>الهدف الثاني</li>
+                            <li>الهدف الثالث</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-info">
+                        <div class="info-item">
+                            <div class="info-label">المدرب</div>
+                            <div id="course-instructor">د. أحمد محمد</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">التاريخ</div>
+                            <div id="course-date">15 يوليو 2025</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">الوقت</div>
+                            <div id="course-time">9:00 صباحاً - 3:00 مساءً</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">المكان</div>
+                            <div id="course-location">قاعة التدريب الرئيسية</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">المدة</div>
+                            <div id="course-duration">6 ساعات</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">الفئة المستهدفة</div>
+                            <div id="course-target">الممرضين والممرضات</div>
+                        </div>
+                    </div>
+
+                    <div class="register-section">
+                        <h3>هل أنت مستعد للتسجيل؟</h3>
+                        <p>انضم إلى هذه الدورة المميزة وطور مهاراتك المهنية</p>
+                        <button class="btn btn-primary" style="background: white; color: #2196F3; margin-top: 1rem;">سجل الآن</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Page -->
+            <div id="calendar" class="page">
+                <div class="calendar-container">
+                    <h2 style="text-align: center; margin-bottom: 1rem; color: #2c3e50;">تقويم الدورات التدريبية</h2>
+                    <p style="text-align: center; color: #666; margin-bottom: 2rem;">تصفح مواعيد جميع الدورات التدريبية القادمة والمقررة</p>
+                    
+                    <div class="calendar-placeholder">
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
+                            <p>سيتم عرض تقويم Google Calendar هنا</p>
+                            <p style="font-size: 0.9rem; color: #999; margin-top: 0.5rem;">يمكن دمج تقويم Google Calendar باستخدام iframe</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">الدورات القادمة</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                            <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; border-right: 4px solid #2196F3;">
+                                <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">الرعاية التمريضية المتقدمة</h4>
+                                <p style="color: #666; font-size: 0.9rem;">15 يوليو 2025 - 9:00 صباحاً</p>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; border-right: 4px solid #4CAF50;">
+                                <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">طب الطوارئ والإسعافات الأولية</h4>
+                                <p style="color: #666; font-size: 0.9rem;">20 يوليو 2025 - 10:00 صباحاً</p>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; border-right: 4px solid #FF9800;">
+                                <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">مكافحة العدوى والتعقيم</h4>
+                                <p style="color: #666; font-size: 0.9rem;">25 يوليو 2025 - 2:00 مساءً</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Page -->
+            <div id="faq" class="page">
+                <div class="faq-container">
+                    <h2 style="text-align: center; margin-bottom: 1rem; color: #2c3e50;">الأسئلة الشائعة</h2>
+                    <p style="text-align: center; color: #666; margin-bottom: 2rem;">إجابات على أكثر الأسئلة شيوعاً حول منصة التدريب</p>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            كيف يمكنني التسجيل في الدورات التدريبية؟
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            يمكنك التسجيل في الدورات من خلال الضغط على زر "سجل الآن" في صفحة تفاصيل الدورة. ستحتاج إلى تعبئة النموذج المطلوب وتأكيد التسجيل.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            هل الدورات مجانية؟
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            نعم، جميع الدورات التدريبية المقدمة من خلال هذه المنصة مجانية لموظفي مستشفى جازان العام والمتدربين المعتمدين.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            كم هي مدة الدورات التدريبية؟
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            تختلف مدة الدورات حسب المحتوى والموضوع. معظم الدورات تتراوح بين 4-8 ساعات، وبعضها قد يمتد لعدة أيام للدورات المتقدمة.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            هل أحصل على شهادة بعد إنهاء الدورة؟
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            نعم، ستحصل على شهادة معتمدة من قسم التدريب في مستشفى جازان العام بعد الانتهاء من الدورة بنجاح واجتياز التقييم المطلوب.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            ماذا لو لم أتمكن من حضور الدورة في الموعد المحدد؟
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            يمكنك التواصل مع قسم التدريب لإعادة جدولة موعدك أو الانتظار للدورة التالية. كما يمكنك إلغاء التسجيل قبل 48 ساعة من موعد الدورة.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            كيف يمكنني التواصل مع قسم التدريب؟
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            يمكنك التواصل معنا عبر الهاتف على الرقم: 017-3214567 أو عبر البريد الإلكتروني: training@jazangh.sa أو زيارة مكتب قسم التدريب في الطابق الثاني.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            هل يمكنني اقتراح دورة تدريبية جديدة؟
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            بالطبع! نرحب بجميع الاقتراحات لتطوير برامجنا التدريبية. يمكنك إرسال اقتراحك عبر البريد الإلكتروني أو مناقشته مع مشرف التدريب.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 مستشفى جازان العام - قسم التدريب. جميع الحقوق محفوظة.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                للتواصل: training@jazangh.sa | هاتف: 017-3214567
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update navigation active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Find and activate the corresponding nav link
+            const activeLink = document.querySelector(`[onclick="showPage('${pageId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Course details functionality
+        const courseData = {
+            'nursing-care': {
+                title: 'الرعاية التمريضية المتقدمة',
+                icon: '👩‍⚕️',
+                description: 'دورة شاملة تهدف إلى تطوير مهارات الممرضين والممرضات في تقديم الرعاية المتقدمة للمرضى. تغطي الدورة أحدث التقنيات والممارسات في التمريض الحديث.',
+                objectives: [
+                    'إتقان تقنيات الرعاية التمريضية المتقدمة',
+                    'تطوير مهارات التواصل مع المرضى وأسرهم',
+                    'فهم البروتوكولات الطبية الحديثة',
+                    'تطبيق معايير الجودة والسلامة في الرعاية'
+                ],
+                instructor: 'د. فاطمة الأحمد - استشاري تمريض',
+                date: '15 يوليو 2025',
+                time: '9:00 صباحاً - 3:00 مساءً',
+                location: 'قاعة التدريب الرئيسية - الطابق الثالث',
+                duration: '6 ساعات تدريبية',
+                target: 'الممرضين والممرضات - جميع المستويات'
+            },
+            'emergency-medicine': {
+                title: 'طب الطوارئ والإسعافات الأولية',
+                icon: '🚑',
+                description: 'دورة تخصصية في طب الطوارئ تغطي جميع جوانب التعامل مع الحالات الطارئة والحرجة. تشمل التدريب العملي على تقنيات الإنعاش والإسعافات الأولية.',
+                objectives: [
+                    'إتقان تقنيات الإنعاش القلبي الرئوي',
+                    'التعامل مع الحالات الطارئة المختلفة',
+                    'استخدام أجهزة الطوارئ الطبية',
+                    'تطبيق بروتوكولات الأمان في الطوارئ'
+                ],
+                instructor: 'د. محمد العتيبي - استشاري طوارئ',
+                date: '20 يوليو 2025',
+                time: '10:00 صباحاً - 4:00 مساءً',
+                location: 'مركز المحاكاة الطبية',
+                duration: '6 ساعات تدريبية',
+                target: 'الأطباء والممرضين - قسم الطوارئ'
+            },
+            'infection-control': {
+                title: 'مكافحة العدوى والتعقيم',
+                icon: '🦠',
+                description: 'دورة أساسية في مكافحة العدوى والتعقيم تهدف إلى تعزيز الممارسات الآمنة في البيئة الطبية ومنع انتشار الأمراض المعدية.',
+                objectives: [
+                    'فهم أساسيات مكافحة العدوى',
+                    'تطبيق بروتوكولات التعقيم والتطهير',
+                    'استخدام معدات الحماية الشخصية',
+                    'التعامل مع النفايات الطبية الخطرة'
+                ],
+                instructor: 'د. سارة القحطاني - اختصاصي مكافحة العدوى',
+                date: '25 يوليو 2025',
+                time: '2:00 مساءً - 6:00 مساءً',
+                location: 'قاعة التدريب B - الطابق الثاني',
+                duration: '4 ساعات تدريبية',
+                target: 'جميع الكوادر الطبية والفنية'
+            },
+            'pediatric-nursing': {
+                title: 'تمريض الأطفال',
+                icon: '👶',
+                description: 'دورة متخصصة في تمريض الأطفال تغطي الرعاية التمريضية الخاصة للأطفال من الولادة وحتى سن المراهقة.',
+                objectives: [
+                    'فهم خصائص النمو والتطور للأطفال',
+                    'تقديم الرعاية التمريضية المناسبة لكل فئة عمرية',
+                    'التعامل مع الأطفال وأسرهم',
+                    'إدارة الألم عند الأطفال'
+                ],
+                instructor: 'د. نورا الشهري - استشاري تمريض أطفال',
+                date: '30 يوليو 2025',
+                time: '9:00 صباحاً - 1:00 مساءً',
+                location: 'قسم الأطفال - قاعة الاجتماعات',
+                duration: '4 ساعات تدريبية',
+                target: 'ممرضي الأطفال والحضانة'
+            },
+            'cardiology': {
+                title: 'أمراض القلب والأوعية الدموية',
+                icon: '💓',
+                description: 'دورة تخصصية في أمراض القلب والأوعية الدموية تغطي التشخيص والعلاج والرعاية التمريضية للمرضى.',
+                objectives: [
+                    'فهم أمراض القلب الشائعة',
+                    'قراءة وتفسير تخطيط القلب',
+                    'التعامل مع مرضى القلب',
+                    'بروتوكولات العناية المركزة للقلب'
+                ],
+                instructor: 'د. أسامة الغامدي - استشاري قلب',
+                date: '5 أغسطس 2025',
+                time: '8:00 صباحاً - 12:00 مساءً',
+                location: 'وحدة القلب - قاعة التدريب',
+                duration: '4 ساعات تدريبية',
+                target: 'أطباء وممرضي القلب'
+            },
+            'health-safety': {
+                title: 'الصحة والسلامة المهنية',
+                icon: '🛡️',
+                description: 'دورة شاملة في الصحة والسلامة المهنية في البيئة المستشفوية تهدف إلى حماية العاملين والمرضى.',
+                objectives: [
+                    'تحديد المخاطر المهنية في المستشفى',
+                    'تطبيق إجراءات السلامة',
+                    'التعامل مع الحوادث والطوارئ',
+                    'استخدام معدات الحماية'
+                ],
+                instructor: 'م. خالد الزهراني - مختص سلامة مهنية',
+                date: '10 أغسطس 2025',
+                time: '1:00 مساءً - 5:00 مساءً',
+                location: 'قاعة السلامة - المبنى الإداري',
+                duration: '4 ساعات تدريبية',
+                target: 'جميع موظفي المستشفى'
+            }
+        };
+
+        function showCourseDetails(courseId) {
+            const course = courseData[courseId];
+            if (!course) return;
+
+            // Update course details
+            document.getElementById('course-title').textContent = course.title;
+            document.getElementById('course-image-large').innerHTML = course.icon;
+            document.getElementById('course-desc-text').textContent = course.description;
+            
+            // Update objectives
+            const objectivesList = document.getElementById('objectives-list');
+            objectivesList.innerHTML = '';
+            course.objectives.forEach(objective => {
+                const li = document.createElement('li');
+                li.textContent = objective;
+                li.style.marginBottom = '0.5rem';
+                objectivesList.appendChild(li);
+            });
+
+            // Update course info
+            document.getElementById('course-instructor').textContent = course.instructor;
+            document.getElementById('course-date').textContent = course.date;
+            document.getElementById('course-time').textContent = course.time;
+            document.getElementById('course-location').textContent = course.location;
+            document.getElementById('course-duration').textContent = course.duration;
+            document.getElementById('course-target').textContent = course.target;
+
+            // Show course details page
+            showPage('course-details');
+        }
+
+        // FAQ functionality
+        function toggleFAQ(button) {
+            const answer = button.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Close all FAQ answers
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.classList.remove('active');
+            });
+            
+            // Reset all buttons
+            document.querySelectorAll('.faq-question span').forEach(span => {
+                span.textContent = '+';
+            });
+            
+            // Toggle current answer
+            if (!isActive) {
+                answer.classList.add('active');
+                button.querySelector('span').textContent = '-';
+            }
+        }
+
+        // Smooth scrolling for internal links
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add some entrance animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            // Observe course cards for animation
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Add some interactive effects
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.course-card, .quick-link');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                } else {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
